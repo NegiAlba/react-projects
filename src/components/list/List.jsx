@@ -1,4 +1,3 @@
-
 const List = ({student}) => {
     return (
         <>
