@@ -1,30 +1,34 @@
-import React, { useState } from 'react';
 import './App.css';
-import data from './data';
-import List from './components/list/List';
-import Navbar from './components/navbar/Navbar';
+import Navbar from './components/navbar/Navbar';       
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Projects from './pages/Projects';
 import Contact from './pages/Contact';
 
+const routes = [ 
+  { path:"/", name:"Home", Component:Home},
+  { path:"/projects", name:"Projects", Component:Projects},
+  { path:"/contact", name:"Contact", Component:Contact}
+]
+
 function App() {
-  const [student, setStudent] = useState(data);
   return (
     <Router>
       <main>
         <Navbar/>
+        <section className="container">
         <Switch>
-          <Route path="/" component={Home}>
-            <section className="container">
-              <h2>Attendance List for {student.length} students</h2>
-              <List student={student}/>
-              <button onClick = {()=>setStudent([])}>Clear list</button>
-            </section>
-          </Route>
-          <Route path='/projects' component={Projects}/>
-          <Route path='/contact' component={Contact}/>
+            {routes.map(({path, Component})=>(
+              <Route key={path} exact path={path}>
+                {()=> (
+                    <div className="page">
+                      <Component/>
+                    </div>
+                )}
+              </Route>
+            ))}
         </Switch>
+        </section>
       </main>
     </Router>
   );

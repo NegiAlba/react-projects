@@ -5,20 +5,20 @@ import * as Fi from 'react-icons/fi';
 import * as Ri from 'react-icons/ri';
 import * as Si from 'react-icons/si';
 import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 
 const Navbar = () => {
     const [sidebar,setSidebar] = useState(false);
 
-    const showSidebar = ()=> setSidebar(!sidebar);
+    const showSidebar = () => setSidebar(!sidebar);
 
     return (
         <>  
             <div className='navbar'>
-                <Link to="#">
+                <NavLink to="#">
                     <Ri.RiEyeLine onClick={showSidebar} className='open-eye'/>
-                </Link>
+                </NavLink>
             </div>
             <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>
             <ul className='nav-menu-items'>
@@ -26,13 +26,19 @@ const Navbar = () => {
                     <Ri.RiEyeCloseLine className='closed-eye'/>
                 </li>
                 <li className="nav-item">
-                    <Bi.BiGame/>
+                    <NavLink to="/" exact activeClassName="selected">
+                        <Bi.BiGame/>
+                    </NavLink>
                 </li>
                 <li className="nav-item">
-                    <Si.SiRiotgames/>
+                    <NavLink to="/projects" activeClassName="selected">
+                        <Si.SiRiotgames/>
+                    </NavLink>
                 </li>
                 <li className="nav-item">
-                    <Fa.FaAtom/>
+                    <NavLink to="/contact" activeClassName="selected">
+                        <Fa.FaAtom/>
+                    </NavLink>
                 </li>
                 <li className="nav-item">
                     <Fi.FiSlack/>
